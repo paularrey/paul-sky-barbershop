@@ -158,13 +158,8 @@ export default function HeroCanvas() {
   const showFallback = !webgl || reducedMotion
 
   return (
-    <div className="absolute inset-0 z-0" ref={wrapper} aria-hidden="true">
-      {showFallback && (
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-25 grayscale"
-          style={{ backgroundImage: `url(${fallbackImg})` }}
-        />
-      )}
+    <div className="hero__canvas" ref={wrapper} aria-hidden="true">
+      {showFallback && <div className="hero__fallback" style={{ backgroundImage: `url(${fallbackImg})` }} />}
 
       {!showFallback && ready && inView && (
         <Canvas
