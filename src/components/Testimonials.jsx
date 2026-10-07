@@ -4,6 +4,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import { GALLERY_IMAGES } from '../data/gallery'
 import Reveal from './Reveal'
+import { CONTAINER, EYEBROW, SECTION, SECTION_TITLE } from '../lib/ui'
 
 const REVIEWS = [
   {
@@ -38,18 +39,16 @@ const REVIEWS = [
 
 export default function Testimonials() {
   return (
-    <section className="section section--alt" id="testimonials">
-      <div className="container section-head section-head--center">
-        <Reveal>
-          <span className="eyebrow">Testimonials</span>
-          <h2 className="section-title">
-            Words from the <span className="gold">chair</span>
+    <section className={`bg-zinc-900 ${SECTION}`} id="testimonials">
+      <div className={CONTAINER}>
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <span className={EYEBROW}>Testimonials</span>
+          <h2 className={SECTION_TITLE}>
+            Words from the <span className="text-amber-500">chair</span>
           </h2>
         </Reveal>
-      </div>
 
-      <Reveal delay={0.08}>
-        <div className="testimonials__wrap">
+        <Reveal className="mt-12" delay={0.08}>
           <Swiper
             modules={[Autoplay, Pagination, Keyboard]}
             spaceBetween={24}
@@ -63,29 +62,34 @@ export default function Testimonials() {
           >
             {REVIEWS.map((review) => (
               <SwiperSlide key={review.name}>
-                <figure className="testimonial">
-                  <div className="testimonial__stars" aria-label="5 out of 5 stars">
-                    ★★★★★
+                <figure className="flex h-full flex-col items-center justify-between rounded-lg border border-zinc-800/50 bg-zinc-950 p-8 text-center md:p-12">
+                  <div>
+                    <div className="text-lg tracking-[6px] text-amber-500" aria-label="5 out of 5 stars">
+                      ★★★★★
+                    </div>
+                    <blockquote className="mt-6 font-display text-xl italic leading-relaxed text-zinc-100 md:text-2xl">
+                      “{review.quote}”
+                    </blockquote>
                   </div>
-                  <blockquote>“{review.quote}”</blockquote>
-                  <figcaption className="testimonial__author">
+
+                  <figcaption className="mt-8 flex items-center justify-center gap-4">
                     <img
-                      className="testimonial__avatar"
                       src={review.avatar}
                       alt=""
+                      className="h-14 w-14 rounded-full border-2 border-amber-500 object-cover"
                       loading="lazy"
                     />
-                    <div>
-                      <strong>{review.name}</strong>
-                      <span>{review.role}</span>
+                    <div className="text-left">
+                      <strong className="block text-sm font-semibold text-zinc-100">{review.name}</strong>
+                      <span className="text-xs uppercase tracking-widest text-zinc-400">{review.role}</span>
                     </div>
                   </figcaption>
                 </figure>
               </SwiperSlide>
             ))}
           </Swiper>
-        </div>
-      </Reveal>
+        </Reveal>
+      </div>
     </section>
   )
 }
